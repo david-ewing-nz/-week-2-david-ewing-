@@ -1,6 +1,7 @@
 ---
 title: "Comparison of Cylinder Count to Engine Displacement"
 author: "David Ewing (dew59)"
+date: "23 July 2024"
 format: pdf
 ---
 
@@ -8,16 +9,12 @@ format: pdf
 
 ## Research Question
 
-Big Dawg commissioned an analysis and report to investigate whether cars with more cylinders have larger engines. He believes this is a fabricated lie from the radical left and wants a report to confirm or refute this claim. (I think it is a lie from the radical right - that dog don't hunt\footnote{ https://english.stackexchange.com/questions/52755/meaning-and-origin-of-that-dog-dont-hunt})
-Big Dawg ("Bubba") commissioned an analysis and report to investigate whether cars with more cylinders have larger engines. He believes this is a fabricated lie from the radical left and wants a report to confirm or refute this claim. 
+Big Dawg ("Bubba") commissioned an analysis and report to investigate whether cars with more cylinders have larger engines. He believes this is a fabricated lie from the radical left and wants a report to confirm or reject this claim. 
 
 ## Data Analysis
-
-Using the `mtcars` dataset (a default dataset in R), we investigate the associated relationship between the number of cylinders and engine displacement. We compute the mean displacement for each cylinder count and present this information in a beautifully-formatted table.
+ 
 Using the `mtcars` dataset (a default dataset in R), we investigate the associated relationship between the number of cylinders and engine displacement. We compute the mean displacement for each cylinder count and present this information in a beautifully-formatted table and in them thar 'merican units of 'cubic inches'. 
-
-```{r setup, include=FALSE}
-# Load necessary libraries
+ 
 ```{r setup_packages, include=FALSE}
 # Load  libraries
 library(tidyverse)
@@ -64,7 +61,6 @@ ggplot(summary_data, aes(x = factor(cyl), y = Displacement)) +
        y = "Engine Displacement (cu.in.)") +
   theme_minimal()
 ```
-
 
 ## Interpretation
 The table data is also shown graphically in the bar chart, confirming that cars with more cylinders generally have larger engine displacements. This visual aid should help Big Dawg understand the relationship more easily and clearly.
