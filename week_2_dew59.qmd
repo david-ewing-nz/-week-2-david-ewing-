@@ -1,0 +1,73 @@
+---
+title: "Comparison of Cylinder Count to Engine Displacement"
+author: "David Ewing (dew59)"
+format: pdf
+---
+
+# Comparison of Cylinder Count to Engine Displacement
+
+## Research Question
+
+Big Dawg commissioned an analysis and report to investigate whether cars with more cylinders have larger engines. He believes this is a fabricated lie from the radical left and wants a report to confirm or refute this claim. (I think it is a lie from the radical right - that dog don't hunt\footnote{ https://english.stackexchange.com/questions/52755/meaning-and-origin-of-that-dog-dont-hunt})
+Big Dawg ("Bubba") commissioned an analysis and report to investigate whether cars with more cylinders have larger engines. He believes this is a fabricated lie from the radical left and wants a report to confirm or refute this claim. 
+
+## Data Analysis
+
+Using the `mtcars` dataset (a default dataset in R), we investigate the associated relationship between the number of cylinders and engine displacement. We compute the mean displacement for each cylinder count and present this information in a beautifully-formatted table.
+Using the `mtcars` dataset (a default dataset in R), we investigate the associated relationship between the number of cylinders and engine displacement. We compute the mean displacement for each cylinder count and present this information in a beautifully-formatted table and in them thar 'merican units of 'cubic inches'. 
+
+```{r setup, include=FALSE}
+# Load necessary libraries
+```{r setup_packages, include=FALSE}
+# Load  libraries
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+```
+
+## Results
+
+```{r echo=FALSE}
+# Summarise data
+summary_data <- mtcars %>%
+  group_by(cyl) %>%
+  summarize(Displacement = round(mean(disp) , 2)) %>%
+  arrange(cyl)
+
+# Create table data 
+table_data <- summary_data %>%
+  mutate(across(everything(), ~ cell_spec(.x, align = "c")))
+
+# Create table
+summary_table <- table_data %>%
+  kable("latex", col.names = c("Cylinders", "Displacement (cu.in.)"), 
+        escape = FALSE,
+        caption = "Table 1: Mean Engine Displacement by Number of Cylinders.",
+        booktabs = TRUE) %>%
+  kable_styling(full_width = FALSE, position = "center", 
+                latex_options = c("hold_position")) %>%
+  column_spec(1, border_left = FALSE, border_right = FALSE, latex_valign = "m", latex_column_spec = "c") %>%
+  column_spec(2, border_left = FALSE, border_right = FALSE, latex_valign = "m", latex_column_spec = "c")
+
+# Print table
+summary_table
+```
+
+```{r echo=FALSE}
+# Create bar chart
+
+
+ggplot(summary_data, aes(x = factor(cyl), y = Displacement)) +
+  geom_bar(stat = "identity", fill = "skyblue", color = "black") +
+  labs(title = "Mean Engine Displacement by Number of Cylinders",
+       x = "Number of Cylinders",
+       y = "Engine Displacement (cu.in.)") +
+  theme_minimal()
+```
+
+
+## Interpretation
+The table data is also shown graphically in the bar chart, confirming that cars with more cylinders generally have larger engine displacements. This visual aid should help Big Dawg understand the relationship more easily and clearly.
+
+## Conclusion
+In conclusion, the analysis demonstrates that there is a positive correlation between the number of cylinders and engine displacement in cars. Bubba, your null hypothesis ain't correct (e.g. "that dog don't hunt")\footnote{See the meaning and origin of the phrase: https://english.stackexchange.com/questions/52755/meaning-and-origin-of-that-dog-dont-hunt} 
